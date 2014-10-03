@@ -436,6 +436,11 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 		);
 	}
 
+	// selection operating
+	public String getSelectedText() {
+		return getReader().getTextView().getSelectedText();
+	}
+
 	// manage view
 	public void setPageStart(TextPosition position) {
 		getReader().getTextView().gotoPosition(position.ParagraphIndex, position.ElementIndex, position.CharIndex);

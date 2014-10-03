@@ -356,6 +356,10 @@ public class ApiClientImplementation implements ServiceConnection, Api, ApiMetho
 		return requestIntegerList(GET_PARAGRAPH_WORD_INDICES, envelope(paragraphIndex));
 	}
 
+	public String getSelectedText() throws ApiException {
+		return requestString(GET_SELECTED_TEXT, EMPTY_PARAMETERS);
+	}
+
 	public void setPageStart(TextPosition position) throws ApiException {
 		request(SET_PAGE_START, new ApiObject[] { position });
 	}

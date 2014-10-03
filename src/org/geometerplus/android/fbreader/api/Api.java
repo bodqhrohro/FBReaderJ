@@ -54,6 +54,9 @@ public interface Api {
 	TextPosition getPageEnd() throws ApiException;
 	boolean isPageEndOfSection() throws ApiException;
 	boolean isPageEndOfText() throws ApiException;
+	
+	// selection processing
+	String getSelectedText() throws ApiException;
 
 	// manage view
 	void setPageStart(TextPosition position) throws ApiException;
