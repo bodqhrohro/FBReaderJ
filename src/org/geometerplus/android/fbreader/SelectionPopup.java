@@ -21,6 +21,8 @@ package org.geometerplus.android.fbreader;
 
 import android.view.View;
 import android.widget.RelativeLayout;
+import java.util.List;
+import java.util.LinkedList;
 
 import org.geometerplus.fbreader.fbreader.ActionCode;
 import org.geometerplus.fbreader.fbreader.FBReaderApp;
@@ -28,6 +30,29 @@ import org.geometerplus.zlibrary.ui.android.R;
 
 class SelectionPopup extends ButtonsPopupPanel {
 	final static String ID = "SelectionPopup";
+
+	private static class SelectionPopupButton {
+		String actionId;
+		boolean isCloseButton;
+		int imageId;
+		int weight;
+		SelectionPopupButton(String ai, boolean icb, int ii, int w) {
+			actionId=ai;
+			isCloseButton=icb;
+			imageId=ii;
+			weight=w;
+		}
+	}
+
+	static private List<SelectionPopupButton> buttonSet=new LinkedList<SelectionPopupButton>();
+
+	static {
+		buttonSet.add(new SelectionPopupButton(ActionCode.SELECTION_COPY_TO_CLIPBOARD, true, R.drawable.selection_copy,100));
+		buttonSet.add(new SelectionPopupButton(ActionCode.SELECTION_SHARE, true, R.drawable.selection_share,200));
+		buttonSet.add(new SelectionPopupButton(ActionCode.SELECTION_TRANSLATE, true, R.drawable.selection_translate,300));
+		buttonSet.add(new SelectionPopupButton(ActionCode.SELECTION_BOOKMARK, true, R.drawable.selection_bookmark,400));
+		buttonSet.add(new SelectionPopupButton(ActionCode.SELECTION_CLEAR, true, R.drawable.selection_close,500));
+	}
 
 	SelectionPopup(FBReaderApp fbReader) {
 		super(fbReader);
@@ -46,11 +71,9 @@ class SelectionPopup extends ButtonsPopupPanel {
 
 		myWindow = new PopupWindow(activity, root, PopupWindow.Location.Floating);
 
-		addButton(ActionCode.SELECTION_COPY_TO_CLIPBOARD, true, R.drawable.selection_copy);
-		addButton(ActionCode.SELECTION_SHARE, true, R.drawable.selection_share);
-		addButton(ActionCode.SELECTION_TRANSLATE, true, R.drawable.selection_translate);
-		addButton(ActionCode.SELECTION_BOOKMARK, true, R.drawable.selection_bookmark);
-		addButton(ActionCode.SELECTION_CLEAR, true, R.drawable.selection_close);
+		for (SelectionPopupButton curButton: buttonSet) {
+			addButton(curButton.actionId,curButton.isCloseButton,curButton.imageId);
+		}
 	}
 
 	public void move(int selectionStartY, int selectionEndY) {
@@ -78,5 +101,9 @@ class SelectionPopup extends ButtonsPopupPanel {
 
 		layoutParams.addRule(verticalPosition);
 		myWindow.setLayoutParams(layoutParams);
+	}
+	
+	public static void addSelectionHandler(String actionId, boolean isCloseButton, int imageId, int weight) {
+		buttonSet.add(new SelectionPopupButton(actionId,isCloseButton,imageId,weight));
 	}
 }
