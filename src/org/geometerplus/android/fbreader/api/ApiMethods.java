@@ -45,6 +45,7 @@ interface ApiMethods {
 
 	// selection operate
 	int GET_SELECTED_TEXT = 721;
+	int ADD_SELECTION_HANDLER = 722;
 
 	// view management
 	int SET_PAGE_START = 801;

@@ -441,6 +441,10 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 		return getReader().getTextView().getSelectedText();
 	}
 
+	public void addSelectionHandler(String actionId, boolean isCloseButton, int imageId, int weight) {
+		SelectionPopup.addSelectionHandler(actionId, isCloseButton, imageId, weight);
+	}
+
 	// manage view
 	public void setPageStart(TextPosition position) {
 		getReader().getTextView().gotoPosition(position.ParagraphIndex, position.ElementIndex, position.CharIndex);

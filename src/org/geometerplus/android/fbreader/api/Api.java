@@ -57,6 +57,7 @@ public interface Api {
 	
 	// selection processing
 	String getSelectedText() throws ApiException;
+	void addSelectionHandler(String actionId, boolean isCloseButton, int imageId, int weight) throws ApiException;
 
 	// manage view
 	void setPageStart(TextPosition position) throws ApiException;
