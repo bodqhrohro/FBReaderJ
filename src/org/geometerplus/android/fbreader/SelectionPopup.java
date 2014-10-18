@@ -42,16 +42,19 @@ class SelectionPopup extends ButtonsPopupPanel {
 			imageId=ii;
 			weight=w;
 		}
+		public boolean compareWeight(int w) {
+			return w<weight;
+		}
 	}
 
 	static private List<SelectionPopupButton> buttonSet=new LinkedList<SelectionPopupButton>();
 
 	static {
-		buttonSet.add(new SelectionPopupButton(ActionCode.SELECTION_COPY_TO_CLIPBOARD, true, R.drawable.selection_copy,100));
-		buttonSet.add(new SelectionPopupButton(ActionCode.SELECTION_SHARE, true, R.drawable.selection_share,200));
-		buttonSet.add(new SelectionPopupButton(ActionCode.SELECTION_TRANSLATE, true, R.drawable.selection_translate,300));
-		buttonSet.add(new SelectionPopupButton(ActionCode.SELECTION_BOOKMARK, true, R.drawable.selection_bookmark,400));
-		buttonSet.add(new SelectionPopupButton(ActionCode.SELECTION_CLEAR, true, R.drawable.selection_close,500));
+		addSelectionHandler(ActionCode.SELECTION_COPY_TO_CLIPBOARD, true, R.drawable.selection_copy,100);
+		addSelectionHandler(ActionCode.SELECTION_SHARE, true, R.drawable.selection_share,200);
+		addSelectionHandler(ActionCode.SELECTION_TRANSLATE, true, R.drawable.selection_translate,300);
+		addSelectionHandler(ActionCode.SELECTION_BOOKMARK, true, R.drawable.selection_bookmark,400);
+		addSelectionHandler(ActionCode.SELECTION_CLEAR, true, R.drawable.selection_close,500);
 	}
 
 	SelectionPopup(FBReaderApp fbReader) {
@@ -104,6 +107,11 @@ class SelectionPopup extends ButtonsPopupPanel {
 	}
 	
 	public static void addSelectionHandler(String actionId, boolean isCloseButton, int imageId, int weight) {
-		buttonSet.add(new SelectionPopupButton(actionId,isCloseButton,imageId,weight));
+		int i=0;
+		for (;i<buttonSet.size();i++)
+			if ((buttonSet.get(i)).compareWeight(weight)) {
+				break;
+			};
+		buttonSet.add(i,new SelectionPopupButton(actionId,isCloseButton,imageId,weight));
 	}
 }
