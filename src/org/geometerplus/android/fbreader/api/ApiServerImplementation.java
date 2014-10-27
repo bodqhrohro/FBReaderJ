@@ -140,6 +140,15 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 					return ApiObject.envelope(isPageEndOfSection());
 				case IS_PAGE_END_OF_TEXT:
 					return ApiObject.envelope(isPageEndOfText());
+				case GET_SELECTED_TEXT:
+					return ApiObject.envelope(getSelectedText());
+				case ADD_SELECTION_HANDLER:
+					addSelectionHandler(
+						((ApiObject.String)parameters[0]).Value,
+						((ApiObject.Boolean)parameters[1]).Value,
+						((ApiObject.Integer)parameters[2]).Value,
+						((ApiObject.Integer)parameters[3]).Value
+					);
 				case SET_PAGE_START:
 					setPageStart((TextPosition)parameters[0]);
 					return ApiObject.Void.Instance;
