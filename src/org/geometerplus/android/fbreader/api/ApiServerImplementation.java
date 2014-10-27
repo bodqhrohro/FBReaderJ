@@ -149,6 +149,7 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 						((ApiObject.Integer)parameters[2]).Value,
 						((ApiObject.Integer)parameters[3]).Value
 					);
+					return ApiObject.Void.Instance;
 				case SET_PAGE_START:
 					setPageStart((TextPosition)parameters[0]);
 					return ApiObject.Void.Instance;
