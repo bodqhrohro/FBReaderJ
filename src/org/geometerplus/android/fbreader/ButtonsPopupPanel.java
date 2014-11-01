@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import org.geometerplus.fbreader.fbreader.FBReaderApp;
 
+import android.graphics.drawable.Drawable;
 import android.content.Context;
 import android.view.View;
 import android.widget.ZoomButton;
@@ -48,6 +49,14 @@ abstract class ButtonsPopupPanel extends PopupPanel implements View.OnClickListe
 	protected void addButton(String actionId, boolean isCloseButton, int imageId) {
 		final ActionButton button = new ActionButton(myWindow.getContext(), actionId, isCloseButton);
 		button.setImageResource(imageId);
+		myWindow.addView(button);
+		button.setOnClickListener(this);
+		myButtons.add(button);
+	}
+
+	protected void addButton(String actionId, boolean isCloseButton, Drawable image) {
+		final ActionButton button = new ActionButton(myWindow.getContext(), actionId, isCloseButton);
+		button.setImageDrawable(image);
 		myWindow.addView(button);
 		button.setOnClickListener(this);
 		myButtons.add(button);

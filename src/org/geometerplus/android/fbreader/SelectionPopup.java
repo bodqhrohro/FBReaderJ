@@ -19,6 +19,7 @@
 
 package org.geometerplus.android.fbreader;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.RelativeLayout;
 import java.util.List;
@@ -35,11 +36,20 @@ public class SelectionPopup extends ButtonsPopupPanel {
 		String actionId;
 		boolean isCloseButton;
 		int imageId;
+		Drawable image;
 		int weight;
 		SelectionPopupButton(String ai, boolean icb, int ii, int w) {
 			actionId=ai;
 			isCloseButton=icb;
 			imageId=ii;
+			image=null;
+			weight=w;
+		}
+		SelectionPopupButton(String ai, boolean icb, Drawable i, int w) {
+			actionId=ai;
+			isCloseButton=icb;
+			imageId=0;
+			image=i;
 			weight=w;
 		}
 		public boolean compareWeight(int w) {
@@ -75,7 +85,11 @@ public class SelectionPopup extends ButtonsPopupPanel {
 		myWindow = new PopupWindow(activity, root, PopupWindow.Location.Floating);
 
 		for (SelectionPopupButton curButton: buttonSet) {
-			addButton(curButton.actionId,curButton.isCloseButton,curButton.imageId);
+			if (curButton.image==null) {
+				addButton(curButton.actionId,curButton.isCloseButton,curButton.imageId);
+			} else {
+				addButton(curButton.actionId,curButton.isCloseButton,curButton.image);
+			}
 		}
 	}
 
@@ -113,5 +127,14 @@ public class SelectionPopup extends ButtonsPopupPanel {
 				break;
 			};
 		buttonSet.add(i,new SelectionPopupButton(actionId,isCloseButton,imageId,weight));
+	}
+
+	public static void addSelectionHandler(String actionId, boolean isCloseButton, Drawable image, int weight) {
+		int i=0;
+		for (;i<buttonSet.size();i++)
+			if ((buttonSet.get(i)).compareWeight(weight)) {
+				break;
+			};
+		buttonSet.add(i,new SelectionPopupButton(actionId,isCloseButton,image,weight));
 	}
 }

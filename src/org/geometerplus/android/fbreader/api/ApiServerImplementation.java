@@ -22,8 +22,11 @@ package org.geometerplus.android.fbreader.api;
 import java.util.*;
 
 import android.content.*;
+import android.content.pm.PackageManager.*;
+import android.content.res.*;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 
 import org.geometerplus.zlibrary.core.application.ZLKeyBindings;
 import org.geometerplus.zlibrary.core.library.ZLibrary;
@@ -146,7 +149,7 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 					addSelectionHandler(
 						((ApiObject.String)parameters[0]).Value,
 						((ApiObject.Boolean)parameters[1]).Value,
-						((ApiObject.Integer)parameters[2]).Value,
+						((ApiObject.String)parameters[2]).Value,
 						((ApiObject.Integer)parameters[3]).Value
 					);
 					return ApiObject.Void.Instance;
@@ -451,8 +454,15 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 		return getReader().getTextView().getSelectedText();
 	}
 
-	public void addSelectionHandler(String actionId, boolean isCloseButton, int imageId, int weight) {
-		SelectionPopup.addSelectionHandler(actionId, isCloseButton, imageId, weight);
+	public void addSelectionHandler(String actionId, boolean isCloseButton, String imageUri, int weight) {
+		Resources res = null;
+		try {
+			res = (myContext.getApplicationContext()).getPackageManager().getResourcesForApplication((imageUri.split(":"))[0]);
+		} catch(NameNotFoundException e) {
+			return;
+		}
+		Drawable image = res.getDrawable(res.getIdentifier(imageUri,null,null));
+		SelectionPopup.addSelectionHandler(actionId, isCloseButton, image, weight);
 	}
 
 	// manage view

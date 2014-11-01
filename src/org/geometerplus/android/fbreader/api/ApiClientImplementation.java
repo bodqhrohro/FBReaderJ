@@ -360,10 +360,10 @@ public class ApiClientImplementation implements ServiceConnection, Api, ApiMetho
 		return requestString(GET_SELECTED_TEXT, EMPTY_PARAMETERS);
 	}
 
-	public void addSelectionHandler(String actionId, boolean isCloseButton, int imageId, int weight) throws ApiException {
+	public void addSelectionHandler(String actionId, boolean isCloseButton, String imageUri, int weight) throws ApiException {
 		request(
 			ADD_SELECTION_HANDLER,
-			new ApiObject[] { ApiObject.envelope(actionId), ApiObject.envelope(isCloseButton), ApiObject.envelope(imageId), ApiObject.envelope(weight) }
+			new ApiObject[] { ApiObject.envelope(actionId), ApiObject.envelope(isCloseButton), ApiObject.envelope(imageUri), ApiObject.envelope(weight) }
 		);
 	}
 
