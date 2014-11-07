@@ -10,5 +10,5 @@ public interface ApiListener {
 	//String EVENT_NETWORK_BOOK_LIST_OPEN = "getNetworkBooks";
 	String EVENT_BOOK_CHANGED = "changeBook";
 
-	void onEvent(int event);
+	void onEvent(String event);
 }
