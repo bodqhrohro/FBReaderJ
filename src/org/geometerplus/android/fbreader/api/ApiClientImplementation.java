@@ -11,6 +11,7 @@ import android.content.*;
 import android.graphics.Bitmap;
 import android.os.IBinder;
 import android.os.Parcelable;
+import android.util.Log;
 
 public class ApiClientImplementation implements ServiceConnection, Api, ApiMethods {
 	public static interface ConnectionListener {
@@ -32,12 +33,11 @@ public class ApiClientImplementation implements ServiceConnection, Api, ApiMetho
 			if (myInterface == null || myApiListeners.size() == 0) {
 				return;
 			}
-			final int code = intent.getIntExtra(EVENT_TYPE, -1);
-			if (code != -1) {
-				synchronized (myApiListeners) {
-					for (ApiListener l : myApiListeners) {
-						l.onEvent(code);
-					}
+			final String sCode = intent.getStringExtra(EVENT_TYPE);
+		
+			synchronized (myApiListeners) {
+				for (ApiListener l : myApiListeners) {
+					l.onEvent(sCode);
 				}
 			}
 		}
@@ -368,10 +368,10 @@ public class ApiClientImplementation implements ServiceConnection, Api, ApiMetho
 		return requestString(GET_SELECTED_TEXT, EMPTY_PARAMETERS);
 	}
 
-	public void addSelectionHandler(String actionId, boolean isCloseButton, String imageUri, int weight) throws ApiException {
+	public void addSelectionHandler(String actionId, boolean isCloseButton, int imageId, int weight) throws ApiException {
 		request(
 			ADD_SELECTION_HANDLER,
-			new ApiObject[] { ApiObject.envelope(actionId), ApiObject.envelope(isCloseButton), ApiObject.envelope(imageUri), ApiObject.envelope(weight) }
+			new ApiObject[] { ApiObject.envelope(actionId), ApiObject.envelope(isCloseButton), ApiObject.envelope(imageId), ApiObject.envelope(weight) }
 		);
 	}
 
