@@ -30,6 +30,7 @@ import org.geometerplus.zlibrary.text.hyphenation.ZLTextHyphenator;
 import org.geometerplus.zlibrary.text.model.ZLTextModel;
 import org.geometerplus.zlibrary.text.view.*;
 
+import org.geometerplus.android.fbreader.api.*;
 import org.geometerplus.fbreader.book.*;
 import org.geometerplus.fbreader.bookmodel.*;
 import org.geometerplus.fbreader.fbreader.options.*;
@@ -351,6 +352,8 @@ public final class FBReaderApp extends ZLApplication {
 
 		getViewWidget().reset();
 		getViewWidget().repaint();
+
+		//ApiServerImplementation.sendEvent(this, ApiListener.EVENT_BOOK_CHANGED);
 
 		try {
 			for (FileEncryptionInfo info : book.getPlugin().readEncryptionInfos(book)) {

@@ -22,9 +22,11 @@ package org.geometerplus.android.fbreader;
 import java.util.ArrayList;
 
 import org.geometerplus.fbreader.fbreader.FBReaderApp;
+import org.geometerplus.android.fbreader.api.ApiServerImplementation;
 
 import android.graphics.drawable.Drawable;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.view.View;
 import android.widget.ZoomButton;
 
@@ -71,7 +73,11 @@ abstract class ButtonsPopupPanel extends PopupPanel implements View.OnClickListe
 
 	public void onClick(View view) {
 		final ActionButton button = (ActionButton)view;
-		Application.runAction(button.ActionId);
+		if (button.ActionId.charAt(0) == '@') {
+			ApiServerImplementation.sendEvent((ContextWrapper)myWindow.getContext(), button.ActionId.substring(1));
+		} else {
+			Application.runAction(button.ActionId);
+		}
 		if (button.IsCloseButton) {
 			storePosition();
 			StartPosition = null;

@@ -292,6 +292,10 @@ public class ApiClientImplementation implements ServiceConnection, Api, ApiMetho
 		return requestDate(GET_BOOK_LAST_TURNING_TIME, EMPTY_PARAMETERS);
 	}
 
+	public int getCurrentPage() throws ApiException {
+		return requestInt(GET_CURRENT_PAGE, EMPTY_PARAMETERS);
+	}
+
 	public String getBookLanguage(long id) throws ApiException {
 		return requestString(GET_BOOK_LANGUAGE, envelope(id));
 	}
@@ -318,6 +322,10 @@ public class ApiClientImplementation implements ServiceConnection, Api, ApiMetho
 
 	public Date getBookLastTurningTime(long id) throws ApiException {
 		return requestDate(GET_BOOK_LAST_TURNING_TIME, envelope(id));
+	}
+
+	public int getCurrentPage(long id) throws ApiException {
+		return requestInt(GET_CURRENT_PAGE, envelope(id));
 	}
 
 	public TextPosition getPageStart() throws ApiException {

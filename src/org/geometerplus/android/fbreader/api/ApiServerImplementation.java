@@ -125,6 +125,12 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 					} else {
 						return ApiObject.envelope(getBookLastTurningTime(((ApiObject.Long)parameters[0]).Value));
 					}
+				case GET_CURRENT_PAGE:
+					if (parameters.length == 0) {
+						return ApiObject.envelope(getCurrentPage());
+					} else {
+						return ApiObject.envelope(getCurrentPage(((ApiObject.Long)parameters[0]).Value));
+					}
 				case GET_PARAGRAPHS_NUMBER:
 					return ApiObject.envelope(getParagraphsNumber());
 				case GET_PARAGRAPH_ELEMENTS_COUNT:
@@ -379,6 +385,11 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 		return null;
 	}
 
+	public int getCurrentPage() {
+		// TODO: implement
+		return 0;
+	}
+
 	public String getBookLanguage(long id) {
 		// TODO: implement
 		return null;
@@ -412,6 +423,11 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 	public Date getBookLastTurningTime(long id) {
 		// TODO: implement
 		return null;
+	}
+
+	public int getCurrentPage(long id) {
+		// TODO: implement
+		return 0;
 	}
 
 	// page information

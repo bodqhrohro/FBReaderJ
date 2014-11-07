@@ -28,6 +28,7 @@ public interface Api {
 	String getBookHash() throws ApiException;
 	String getBookUniqueId() throws ApiException;
 	Date getBookLastTurningTime() throws ApiException;
+	int getCurrentPage() throws ApiException;
 
 	// book information for book defined by id
 	String getBookLanguage(long id) throws ApiException;
@@ -38,6 +39,7 @@ public interface Api {
 	String getBookHash(long id) throws ApiException;
 	String getBookUniqueId(long id) throws ApiException;
 	Date getBookLastTurningTime(long id) throws ApiException;
+	int getCurrentPage(long id) throws ApiException;
 
 	//long findBookIdByUniqueId(String uniqueId) throws ApiException;
 	//long findBookIdByFilePath(String uniqueId) throws ApiException;
