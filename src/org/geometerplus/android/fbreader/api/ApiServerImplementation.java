@@ -277,6 +277,14 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 					return ApiObject.envelopeStringList(getOptionNames(
 						((ApiObject.String)parameters[0]).Value
 					));
+				case LIST_BOOK_AUTHORS:
+					if (parameters.length == 0) {
+						return ApiObject.envelopeStringList(getBookAuthors());
+					} else {
+						return ApiObject.envelopeStringList(getBookAuthors(
+							((ApiObject.Long)parameters[0]).Value
+						));
+					}
 				case LIST_BOOK_TAGS:
 					return ApiObject.envelopeStringList(getBookTags());
 				case LIST_ACTIONS:
@@ -356,6 +364,19 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 		return book != null ? book.getTitle() : null;
 	}
 
+	public List<String> getBookAuthors() {
+		final Book book = getReader().getCurrentBook();
+		if (book == null) {
+			return null;
+		}
+		List<Author> authors = book.authors();
+		List<String> s = new LinkedList<String>();
+		for (Author a: authors) {
+			s.add(a.toString());
+		}
+		return s;
+	}
+
 	public List<String> getBookTags() {
 		// TODO: implement
 		return Collections.emptyList();
@@ -396,6 +417,11 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 	}
 
 	public String getBookTitle(long id) {
+		// TODO: implement
+		return null;
+	}
+
+	public List<String> getBookAuthors(long id) {
 		// TODO: implement
 		return null;
 	}

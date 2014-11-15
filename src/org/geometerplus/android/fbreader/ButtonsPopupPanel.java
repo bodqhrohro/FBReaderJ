@@ -20,6 +20,7 @@
 package org.geometerplus.android.fbreader;
 
 import java.util.ArrayList;
+import android.util.Log;
 
 import org.geometerplus.fbreader.fbreader.FBReaderApp;
 import org.geometerplus.android.fbreader.api.ApiServerImplementation;
@@ -67,7 +68,7 @@ abstract class ButtonsPopupPanel extends PopupPanel implements View.OnClickListe
 	@Override
 	protected void update() {
 		for (ActionButton button : myButtons) {
-			button.setEnabled(Application.isActionEnabled(button.ActionId));
+			button.setEnabled(Application.isActionEnabled(button.ActionId) || button.ActionId.charAt(0) == '@');
 		}
 	}
 
