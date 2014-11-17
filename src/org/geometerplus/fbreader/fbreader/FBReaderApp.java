@@ -20,6 +20,8 @@
 package org.geometerplus.fbreader.fbreader;
 
 import java.util.*;
+import android.app.*;
+import android.content.*;
 
 import org.geometerplus.zlibrary.core.application.*;
 import org.geometerplus.zlibrary.core.drm.FileEncryptionInfo;
@@ -73,10 +75,13 @@ public final class FBReaderApp extends ZLApplication {
 
 	public final IBookCollection Collection;
 
+	private Context myContext;
+
 	private SyncData mySyncData = new SyncData();
 
-	public FBReaderApp(IBookCollection collection) {
+	public FBReaderApp(IBookCollection collection, Context context) {
 		Collection = collection;
+		myContext = context;
 
 		collection.addListener(new IBookCollection.Listener() {
 			public void onBookEvent(BookEvent event, Book book) {
@@ -353,7 +358,7 @@ public final class FBReaderApp extends ZLApplication {
 		getViewWidget().reset();
 		getViewWidget().repaint();
 
-		//ApiServerImplementation.sendEvent(this, ApiListener.EVENT_BOOK_CHANGED);
+		ApiServerImplementation.sendEvent((ContextWrapper)myContext, ApiListener.EVENT_BOOK_CHANGED);
 
 		try {
 			for (FileEncryptionInfo info : book.getPlugin().readEncryptionInfos(book)) {

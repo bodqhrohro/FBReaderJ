@@ -235,7 +235,7 @@ public final class FBReader extends Activity implements ZLApplicationWindow, FBR
 
 		myFBReaderApp = (FBReaderApp)FBReaderApp.Instance();
 		if (myFBReaderApp == null) {
-			myFBReaderApp = new FBReaderApp(new BookCollectionShadow());
+			myFBReaderApp = new FBReaderApp(new BookCollectionShadow(),this);
 		}
 		getCollection().bindToService(this, null);
 		myBook = null;
