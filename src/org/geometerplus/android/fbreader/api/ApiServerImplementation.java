@@ -131,6 +131,12 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 					} else {
 						return ApiObject.envelope(getCurrentPage(((ApiObject.Long)parameters[0]).Value));
 					}
+				case GET_TOTAL_PAGES:
+					if (parameters.length == 0) {
+						return ApiObject.envelope(getTotalPages());
+					} else {
+						return ApiObject.envelope(getTotalPages(((ApiObject.Long)parameters[0]).Value));
+					}
 				case GET_PARAGRAPHS_NUMBER:
 					return ApiObject.envelope(getParagraphsNumber());
 				case GET_PARAGRAPH_ELEMENTS_COUNT:
@@ -407,8 +413,11 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 	}
 
 	public int getCurrentPage() {
-		// TODO: implement
-		return 0;
+		return getReader().getTextView().pagePosition().Current;
+	}
+
+	public int getTotalPages() {
+		return getReader().getTextView().pagePosition().Total;
 	}
 
 	public String getBookLanguage(long id) {
@@ -452,6 +461,11 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 	}
 
 	public int getCurrentPage(long id) {
+		// TODO: implement
+		return 0;
+	}
+
+	public int getTotalPages(long id) {
 		// TODO: implement
 		return 0;
 	}

@@ -299,6 +299,10 @@ public class ApiClientImplementation implements ServiceConnection, Api, ApiMetho
 		return requestInt(GET_CURRENT_PAGE, EMPTY_PARAMETERS);
 	}
 
+	public int getTotalPages() throws ApiException {
+		return requestInt(GET_TOTAL_PAGES, EMPTY_PARAMETERS);
+	}
+
 	public String getBookLanguage(long id) throws ApiException {
 		return requestString(GET_BOOK_LANGUAGE, envelope(id));
 	}
@@ -333,6 +337,10 @@ public class ApiClientImplementation implements ServiceConnection, Api, ApiMetho
 
 	public int getCurrentPage(long id) throws ApiException {
 		return requestInt(GET_CURRENT_PAGE, envelope(id));
+	}
+
+	public int getTotalPages(long id) throws ApiException {
+		return requestInt(GET_TOTAL_PAGES, envelope(id));
 	}
 
 	public TextPosition getPageStart() throws ApiException {
