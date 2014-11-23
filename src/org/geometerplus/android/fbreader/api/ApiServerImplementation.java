@@ -518,6 +518,8 @@ public class ApiServerImplementation extends ApiInterface.Stub implements Api, A
 			return;
 		}
 		Drawable image = res.getDrawable(res.getIdentifier(imageUri,null,null));
+		if (SelectionPopup.actionExists(actionId))
+			return;
 		SelectionPopup.addSelectionHandler(actionId, isCloseButton, image, weight);
 	}
 

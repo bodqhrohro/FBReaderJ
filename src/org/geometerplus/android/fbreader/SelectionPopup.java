@@ -137,4 +137,13 @@ public class SelectionPopup extends ButtonsPopupPanel {
 			};
 		buttonSet.add(i,new SelectionPopupButton(actionId,isCloseButton,image,weight));
 	}
+	
+	public static Boolean actionExists(String actionId) {
+		int i=0;
+		for (;i<buttonSet.size();i++)
+			if ((buttonSet.get(i)).actionId == actionId) {
+				return true;
+			};
+		return false;
+	}
 }
