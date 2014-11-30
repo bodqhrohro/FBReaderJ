@@ -21,6 +21,7 @@ package org.geometerplus.zlibrary.ui.android.view;
 
 import java.util.*;
 
+import android.content.Context;
 import android.graphics.*;
 import android.util.FloatMath;
 
@@ -53,8 +54,11 @@ abstract class AnimationProvider {
 	protected int myWidth;
 	protected int myHeight;
 
-	protected AnimationProvider(BitmapManager bitmapManager) {
+	protected Context myContext;
+
+	protected AnimationProvider(BitmapManager bitmapManager, Context context) {
 		myBitmapManager = bitmapManager;
+		myContext = context;
 	}
 
 	Mode getMode() {

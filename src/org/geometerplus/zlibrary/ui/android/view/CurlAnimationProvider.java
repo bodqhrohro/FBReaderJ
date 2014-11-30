@@ -19,8 +19,11 @@
 
 package org.geometerplus.zlibrary.ui.android.view;
 
+import android.content.*;
 import android.graphics.*;
 import android.util.FloatMath;
+
+import org.geometerplus.android.fbreader.api.*;
 
 import org.geometerplus.zlibrary.core.view.ZLView;
 
@@ -37,8 +40,8 @@ class CurlAnimationProvider extends AnimationProvider {
 
 	private float mySpeedFactor = 1;
 
-	CurlAnimationProvider(BitmapManager bitmapManager) {
-		super(bitmapManager);
+	CurlAnimationProvider(BitmapManager bitmapManager, Context context) {
+		super(bitmapManager,context);
 
 		myBackPaint.setAntiAlias(true);
 		myBackPaint.setAlpha(0x40);
@@ -231,6 +234,7 @@ class CurlAnimationProvider extends AnimationProvider {
 		mySpeedFactor = (float)Math.pow(2.0, 0.25 * speed);
 		mySpeed *= 1.5;
 		doStep();
+		ApiServerImplementation.sendEvent((ContextWrapper)myContext, ApiListener.EVENT_PAGE_TURNED);
 	}
 
 	@Override

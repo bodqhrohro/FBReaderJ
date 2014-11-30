@@ -19,6 +19,7 @@
 
 package org.geometerplus.zlibrary.ui.android.view;
 
+import android.content.Context;
 import android.graphics.*;
 
 import org.geometerplus.zlibrary.core.view.ZLView;
@@ -26,8 +27,8 @@ import org.geometerplus.zlibrary.core.view.ZLView;
 class NoneAnimationProvider extends AnimationProvider {
 	private final Paint myPaint = new Paint();
 
-	NoneAnimationProvider(BitmapManager bitmapManager) {
-		super(bitmapManager);
+	NoneAnimationProvider(BitmapManager bitmapManager, Context context) {
+		super(bitmapManager,context);
 	}
 
 	@Override

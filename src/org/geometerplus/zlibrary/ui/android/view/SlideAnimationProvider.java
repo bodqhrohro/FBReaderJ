@@ -19,13 +19,14 @@
 
 package org.geometerplus.zlibrary.ui.android.view;
 
+import android.content.Context;
 import android.graphics.*;
 
 class SlideAnimationProvider extends SimpleAnimationProvider {
 	private final Paint myPaint = new Paint();
 
-	SlideAnimationProvider(BitmapManager bitmapManager) {
-		super(bitmapManager);
+	SlideAnimationProvider(BitmapManager bitmapManager, Context context) {
+		super(bitmapManager,context);
 	}
 
 	@Override

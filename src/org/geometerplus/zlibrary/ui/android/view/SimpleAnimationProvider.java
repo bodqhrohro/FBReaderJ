@@ -19,13 +19,17 @@
 
 package org.geometerplus.zlibrary.ui.android.view;
 
+import android.content.*;
+
+import org.geometerplus.android.fbreader.api.*;
+
 import org.geometerplus.zlibrary.core.view.ZLView;
 
 abstract class SimpleAnimationProvider extends AnimationProvider {
 	private float mySpeedFactor;
 
-	SimpleAnimationProvider(BitmapManager bitmapManager) {
-		super(bitmapManager);
+	SimpleAnimationProvider(BitmapManager bitmapManager, Context context) {
+		super(bitmapManager,context);
 	}
 
 	@Override
@@ -66,6 +70,7 @@ abstract class SimpleAnimationProvider extends AnimationProvider {
 	protected void startAnimatedScrollingInternal(int speed) {
 		mySpeedFactor = (float)Math.pow(1.5, 0.25 * speed);
 		doStep();
+		ApiServerImplementation.sendEvent((ContextWrapper)myContext, ApiListener.EVENT_PAGE_TURNED);
 	}
 
 	@Override

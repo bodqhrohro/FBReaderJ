@@ -36,27 +36,30 @@ public class ZLAndroidWidget extends View implements ZLViewWidget, View.OnLongCl
 	private final BitmapManager myBitmapManager = new BitmapManager(this);
 	private Bitmap myFooterBitmap;
 
+	private Context myContext;
+
 	public ZLAndroidWidget(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		init();
+		init(context);
 	}
 
 	public ZLAndroidWidget(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init();
+		init(context);
 	}
 
 	public ZLAndroidWidget(Context context) {
 		super(context);
-		init();
+		init(context);
 	}
 
-	private void init() {
+	private void init(Context context) {
 		// next line prevent ignoring first onKeyDown DPad event
 		// after any dialog was closed
 		setFocusableInTouchMode(true);
 		setDrawingCacheEnabled(false);
 		setOnLongClickListener(this);
+		myContext = context;
 	}
 
 	@Override
@@ -99,16 +102,16 @@ public class ZLAndroidWidget extends View implements ZLViewWidget, View.OnLongCl
 			myAnimationType = type;
 			switch (type) {
 				case none:
-					myAnimationProvider = new NoneAnimationProvider(myBitmapManager);
+					myAnimationProvider = new NoneAnimationProvider(myBitmapManager,myContext);
 					break;
 				case curl:
-					myAnimationProvider = new CurlAnimationProvider(myBitmapManager);
+					myAnimationProvider = new CurlAnimationProvider(myBitmapManager,myContext);
 					break;
 				case slide:
-					myAnimationProvider = new SlideAnimationProvider(myBitmapManager);
+					myAnimationProvider = new SlideAnimationProvider(myBitmapManager,myContext);
 					break;
 				case shift:
-					myAnimationProvider = new ShiftAnimationProvider(myBitmapManager);
+					myAnimationProvider = new ShiftAnimationProvider(myBitmapManager,myContext);
 					break;
 			}
 		}

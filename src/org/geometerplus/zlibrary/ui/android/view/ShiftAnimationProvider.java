@@ -19,13 +19,14 @@
 
 package org.geometerplus.zlibrary.ui.android.view;
 
+import android.content.Context;
 import android.graphics.*;
 
 class ShiftAnimationProvider extends SimpleAnimationProvider {
 	private final Paint myPaint = new Paint();
 
-	ShiftAnimationProvider(BitmapManager bitmapManager) {
-		super(bitmapManager);
+	ShiftAnimationProvider(BitmapManager bitmapManager, Context context) {
+		super(bitmapManager,context);
 	}
 
 	@Override
