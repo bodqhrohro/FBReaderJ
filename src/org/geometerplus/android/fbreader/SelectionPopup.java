@@ -55,6 +55,13 @@ public class SelectionPopup extends ButtonsPopupPanel {
 		public boolean compareWeight(int w) {
 			return w<weight;
 		}
+		public boolean compareAction(String action) {
+			return actionId.equals(action);
+		}
+		public void setImage(Drawable image) {
+			this.image = image;
+			this.imageId = 0;
+		}
 	}
 
 	static private List<SelectionPopupButton> buttonSet=new LinkedList<SelectionPopupButton>();
@@ -85,7 +92,7 @@ public class SelectionPopup extends ButtonsPopupPanel {
 		myWindow = new PopupWindow(activity, root, PopupWindow.Location.Floating);
 
 		for (SelectionPopupButton curButton: buttonSet) {
-			if (curButton.image==null) {
+			if (curButton.image == null) {
 				addButton(curButton.actionId,curButton.isCloseButton,curButton.imageId);
 			} else {
 				addButton(curButton.actionId,curButton.isCloseButton,curButton.image);
@@ -121,8 +128,11 @@ public class SelectionPopup extends ButtonsPopupPanel {
 	}
 	
 	public static void addSelectionHandler(String actionId, boolean isCloseButton, int imageId, int weight) {
-		int i=0;
-		for (;i<buttonSet.size();i++)
+		int i = getActionExists(actionId);
+		if (i > -1) {
+			return;
+		}
+		for (i = 0;i<buttonSet.size();i++)
 			if ((buttonSet.get(i)).compareWeight(weight)) {
 				break;
 			};
@@ -130,20 +140,25 @@ public class SelectionPopup extends ButtonsPopupPanel {
 	}
 
 	public static void addSelectionHandler(String actionId, boolean isCloseButton, Drawable image, int weight) {
-		int i=0;
-		for (;i<buttonSet.size();i++)
+		int i = getActionExists(actionId);
+		if (i > -1) {
+			buttonSet.get(i).setImage(image);
+			return;
+		}
+		for (i = 0;i<buttonSet.size();i++)
 			if ((buttonSet.get(i)).compareWeight(weight)) {
 				break;
 			};
 		buttonSet.add(i,new SelectionPopupButton(actionId,isCloseButton,image,weight));
 	}
 	
-	public static Boolean actionExists(String actionId) {
-		int i=0;
-		for (;i<buttonSet.size();i++)
-			if ((buttonSet.get(i)).actionId == actionId) {
-				return true;
+	public static int getActionExists(String actionId) {
+		int i = 0;
+		for (;i<buttonSet.size();i++) {
+			if ((buttonSet.get(i)).compareAction(actionId)) {
+				return i;
 			};
-		return false;
+		};
+		return -1;
 	}
 }
